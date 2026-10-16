@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contractor-inquiry-intake"
+version = "0.1.0"
+description = "Turn messy contractor inquiries into grounded, deduplicated leads with explicit missing information."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Kyoungsoo Kim"}]
+dependencies = ["httpx>=0.27,<1", "filelock>=3.13,<4"]
+
+[project.optional-dependencies]
+sheets = ["google-auth[requests]>=2.29,<3"]
+dev = ["pytest>=8,<9", "ruff>=0.11,<1"]
+
+[project.scripts]
+contractor-intake = "contractor_inquiry_intake.cli:main"
+
+[project.urls]
+Repository = "https://github.com/kks0488/contractor-inquiry-intake"
+
+[tool.setuptools.packages.find]
+include = ["contractor_inquiry_intake*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
